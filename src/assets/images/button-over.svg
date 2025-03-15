@@ -1,0 +1,4 @@
+<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="50" rx="10" fill="#6989c6" />
+    <text x="100" y="30" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Button</text>
+</svg>

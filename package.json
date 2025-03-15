@@ -1,0 +1,33 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "A responsive Battleship game built with Phaser 3 and TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/start-dev-server.js",
+    "build": "webpack --mode production",
+    "dev": "webpack serve",
+    "dev:safe": "node scripts/kill-server.js && webpack serve",
+    "dev:robust": "node scripts/start-dev-server.js",
+    "check-ts": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phaser": "^3.60.0",
+    "phaser3-rex-plugins": "^1.80.14"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
