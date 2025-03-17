@@ -251,62 +251,33 @@ export class Player1SetupScene extends BaseScene {
         this.rotateButton.on('pointerdown', () => {
             // Rotate the selected ship
             if (this.selectedShip) {
-                // Get the current grid position and orientation
+                // Check if the ship is placed on the grid
                 const gridPos = this.selectedShip.getGridPosition();
                 
                 if (gridPos) {
-                    // Ship is on the grid, need to check if rotation is valid
+                    // Ship is on the grid, need to handle rotation differently
                     const { row, col } = gridPos;
                     const shipType = this.selectedShip.getType();
                     const isHorizontal = this.selectedShip.isHorizontalOrientation();
                     
-                    // Temporarily remove the ship from the grid
+                    // First, temporarily remove the ship from the grid
                     this.playerGrid.removeShip(row, col, shipType, isHorizontal);
                     
                     // Check if rotation is valid
                     if (this.playerGrid.canPlaceShip(shipType, row, col, !isHorizontal)) {
-                        // Rotation is valid, rotate the ship
+                        // Rotate the ship
                         this.selectedShip.rotate();
                         
-                        // Place ship back in new orientation
+                        // Place ship in new orientation
                         this.playerGrid.placeShip(this.selectedShip, row, col);
-                        
-                        // Make sure the ship is still marked as placed
-                        this.selectedShip.markAsPlaced(row, col);
                         
                         // Play sound if available
                         if (this.sound.get('click')) {
                             this.sound.play('click', { volume: 0.5 });
                         }
                     } else {
-                        // Rotation is not valid, place the ship back in its original orientation
+                        // If rotation is not valid, place the ship back in its original orientation
                         this.playerGrid.placeShip(this.selectedShip, row, col);
-                        
-                        // Show a message to the user
-                        const message = this.add.text(
-                            this.cameras.main.width / 2,
-                            this.cameras.main.height - 100,
-                            'Cannot rotate - not enough space!',
-                            {
-                                fontFamily: 'Arial',
-                                fontSize: '24px',
-                                color: '#ff0000',
-                                stroke: '#000000',
-                                strokeThickness: 2
-                            }
-                        );
-                        message.setOrigin(0.5);
-                        
-                        // Fade out and destroy the message after a short time
-                        this.tweens.add({
-                            targets: message,
-                            alpha: 0,
-                            duration: 1500,
-                            ease: 'Power2',
-                            onComplete: () => {
-                                message.destroy();
-                            }
-                        });
                     }
                 } else {
                     // Ship is not on the grid, just rotate it
